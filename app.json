@@ -1,0 +1,23 @@
+{
+  "expo": {
+    "name": "Assurance",
+    "slug": "assurance-wireless",
+    "version": "1.0.0",
+    "icon": "./assets/awireless.png",
+    "splash": {
+      "backgroundColor": "#00aeef"
+    },
+    "ios": {
+      "bundleIdentifier": "com.enward.assurancewireless",
+      "icon": "./assets/awireless.png"
+    },
+    "android": {
+      "package": "com.enward.assurancewireless"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "5493dd34-fb6e-48cc-8763-89867bf80c41"
+      }
+    }
+  }
+}
