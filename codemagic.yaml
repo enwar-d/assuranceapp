@@ -1,6 +1,6 @@
 workflows:
   ios-workflow:
-    name: Assurance
+    name: Assurance Wireless iOS
     instance_type: mac_mini_m2
     environment:
       flutter: stable
@@ -12,13 +12,9 @@ workflows:
         script: |
           flutter pub get
 
-      - name: Generate app icons
-        script: |
-          dart run flutter_launcher_icons
-
       - name: Install CocoaPods
         script: |
-          find . -name "Podfile" -execdir pod install \;
+          cd ios && pod install
 
       - name: Build unsigned IPA
         script: |
