@@ -1,0 +1,41 @@
+workflows:
+  ios-workflow:
+    name: Assurance 
+    instance_type: mac_mini_m2
+    environment:
+      flutter: stable
+      xcode: latest
+      cocoapods: default
+
+    scripts:
+      - name: Get Flutter packages
+        script: |
+          flutter pub get
+
+      - name: Generate app icons
+        script: |
+          dart run flutter_launcher_icons
+
+      - name: Install CocoaPods
+        script: |
+          cd ios
+          pod install
+          cd ..
+
+      - name: Build unsigned IPA
+        script: |
+          flutter build ipa --release --no-codesign
+
+    artifacts:
+      - build/ios/ipa/*.ipa
+      - build/ios/archive/*.xcarchive
+      - "**/*.ipa"
+      - "**/*.app"
+
+    publishing:
+      email:
+        recipients:
+          - enwar.d@outlook.com
+        notify:
+          success: true
+          failure: true
