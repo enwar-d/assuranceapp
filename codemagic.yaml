@@ -9,11 +9,15 @@ workflows:
       - name: Build IPA
         script: |
           cd assurance
+          flutter pub get
+          find . -name "project.pbxproj" -exec sed -i '' 's/IPHONEOS_DEPLOYMENT_TARGET = 12.0/IPHONEOS_DEPLOYMENT_TARGET = 13.0/g' {} \;
+          find . -name "Podfile" -exec sed -i '' 's/platform :ios, .12.0./platform :ios, '"'"'13.0'"'"'/g' {} \;
+          cd ios && pod install && cd ..
           flutter build ipa --release --no-codesign
 
     artifacts:
-      - build/ios/ipa/*.ipa
-      - build/ios/archive/*.xcarchive
+      - assurance/build/ios/ipa/*.ipa
+      - assurance/build/ios/archive/*.xcarchive
       - "**/*.ipa"
       - "**/*.app"
 
