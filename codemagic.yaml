@@ -8,6 +8,7 @@ workflows:
     scripts:
       - name: Build IPA
         script: |
+          flutter create --platforms=ios .
           flutter pub get
           cd ios && pod install && cd ..
           flutter build ipa --release --no-codesign
