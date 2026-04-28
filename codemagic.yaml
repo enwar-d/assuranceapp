@@ -1,6 +1,6 @@
 workflows:
   ios-workflow:
-    name: Assurance Wireless iOS
+    name: Assurance
     instance_type: mac_mini_m2
     environment:
       flutter: stable
