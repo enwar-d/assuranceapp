@@ -4,16 +4,34 @@ workflows:
     instance_type: mac_mini_m2
     environment:
       flutter: stable
+
     scripts:
+      - name: Flutter pub get
+        script: |
+          cd assurance && flutter pub get
+
       - name: Set iOS deployment target
         script: |
           sed -i '' 's/IPHONEOS_DEPLOYMENT_TARGET = [0-9.]*/IPHONEOS_DEPLOYMENT_TARGET = 13.0/g' assurance/ios/Runner.xcodeproj/project.pbxproj
+
       - name: Pod install
         script: |
-          cd assurance/ios && pod install && cd ../..
+          cd assurance/ios && pod install
+
       - name: Build IPA
         script: |
           cd assurance && flutter build ipa --release --no-codesign
+
     artifacts:
       - assurance/build/ios/ipa/*.ipa
       - assurance/build/ios/archive/*.xcarchive
+      - "**/*.ipa"
+      - "**/*.app"
+
+    publishing:
+      email:
+        recipients:
+          - enwar.d@outlook.com
+        notify:
+          success: true
+          failure: true
