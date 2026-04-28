@@ -8,8 +8,7 @@ workflows:
     scripts:
       - name: Build IPA
         script: |
-          flutter pub get
-          cd ios && pod install && cd ..
+          cd assurance
           flutter build ipa --release --no-codesign
 
     artifacts:
