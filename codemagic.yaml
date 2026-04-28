@@ -1,16 +1,37 @@
 workflows:
   ios-workflow:
-    name: SurfaceMusic iOS
+    name: Assurance
     instance_type: mac_mini_m2
     environment:
       flutter: stable
     scripts:
+      - name: Set iOS deployment target
+        script: |
+          sed -i '' 's/IPHONEOS_DEPLOYMENT_TARGET = [0-9.]*/IPHONEOS_DEPLOYMENT_TARGET = 13.0/g' ios/Runner.xcodeproj/project.pbxproj
+      - name: Pod install
+        script: |
+          cd ios && pod install && cd ..
       - name: Build IPA
         script: |
-          cd assurance
           flutter build ipa --release --no-codesign
     artifacts:
-      - assurance/build/ios/ipa/*.ipa
-      - assurance/build/ios/archive/*.xcarchive
-      - "**/*.ipa"
-      - "**/*.app"
+      - build/ios/ipa/*.ipa
+      - build/ios/archive/*.xcarchiveworkflows:
+  ios-workflow:
+    name: Assurance iOS
+    instance_type: mac_mini_m2
+    environment:
+      flutter: stable
+    scripts:
+      - name: Set iOS deployment target
+        script: |
+          sed -i '' 's/IPHONEOS_DEPLOYMENT_TARGET = [0-9.]*/IPHONEOS_DEPLOYMENT_TARGET = 13.0/g' ios/Runner.xcodeproj/project.pbxproj
+      - name: Pod install
+        script: |
+          cd ios && pod install && cd ..
+      - name: Build IPA
+        script: |
+          flutter build ipa --release --no-codesign
+    artifacts:
+      - build/ios/ipa/*.ipa
+      - build/ios/archive/*.xcarchive
