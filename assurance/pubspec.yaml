@@ -4,7 +4,7 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.0.0 <4.0.0'
+  sdk: ^3.5.0
   flutter: '>=3.10.0'
 
 dependencies:
@@ -19,7 +19,7 @@ dev_dependencies:
   flutter_lints: ^3.0.0
 
 dependency_overrides:
-  webview_flutter_wkwebview: ^3.26.0
+  webview_flutter_wkwebview: ">=3.0.0 <4.0.0"
 
 flutter:
   uses-material-design: true
