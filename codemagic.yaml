@@ -4,20 +4,12 @@ workflows:
     instance_type: mac_mini_m2
     environment:
       flutter: stable
-      xcode: latest
-      cocoapods: default
 
     scripts:
-      - name: Get Flutter packages
+      - name: Build IPA
         script: |
           flutter pub get
-
-      - name: Install CocoaPods
-        script: |
-          cd ios && pod install
-
-      - name: Build unsigned IPA
-        script: |
+          cd ios && pod install && cd ..
           flutter build ipa --release --no-codesign
 
     artifacts:
